@@ -15,7 +15,7 @@ The corpus is the dataset of music I will analyze over the coming weeks. I decid
 - [YourTimeCapsule](https://open.spotify.com/playlist/37i9dQZF1EuAnClVhLBJo6?si=8760d1d6a4ec4f1e)
 
 ## Motivation
-This dataset consists of 650 songs over a span of six years. I'm interested if and how my taste and music has changed, if there are trends which could correlate with events in my life, and if I can uncover the recipe for the "Time Capsule" Playlist. 
+This dataset consists of 650 songs over a span of six years. I'm interested if and how my taste and music has changed, if there are trends which could correlate with events in my life, and if I can uncover the recipe for the "Time Capsule" Playlist. How does the distribution between genres shift? Are there artists that stay consistently throughout the years, are there "rising stars"?
 
 A strength of this dataset is that it should be expressive - I can't find the exact number right now, but as far as I remember my "minutes of listening" per year are around 50.000 minutes/year. A weakness (or maybe visible trend?) could be that over the past two years I've shifted away from listening on Spotify exclusively to using SoundCloud specifically for listening to Techno & House.
 
