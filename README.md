@@ -21,8 +21,8 @@ A strength of this dataset is that it should be expressive - I can't find the ex
 
 As (a-)typical songs I have selected the first and last song of the six yearly playlists:
 ### Tops
-| Title | Artist | Year |
 
+| Title | Artist | Year |
 |-------|--------|------|
 | Fernsehturm | Gossenboss mit Zett | 2021 |
 | Flash | Lewis OfMan | 2020 |
@@ -32,6 +32,7 @@ As (a-)typical songs I have selected the first and last song of the six yearly p
 | Help Me Loose My Mind | Disclosure, London Grammar | 2016|
 
 ### Flops
+
 | Title | Artist | Year |
 |-------|--------|------|
 | Feels Like We Only Go Backwards | Tame Impala | 2021 |
