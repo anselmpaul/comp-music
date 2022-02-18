@@ -22,6 +22,7 @@ A strength of this dataset is that it should be expressive - I can't find the ex
 As (a-)typical songs I have selected the first and last song of the six yearly playlists:
 ### Tops
 | Title | Artist | Year |
+
 |-------|--------|------|
 | Fernsehturm | Gossenboss mit Zett | 2021 |
 | Flash | Lewis OfMan | 2020 |
