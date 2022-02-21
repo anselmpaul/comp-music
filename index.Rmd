@@ -75,7 +75,7 @@ it appears that there is no correlation between the ranking and the features. So
 charts below:
 
 What these plots show are different trends: low `speechiness` and `liveness` 
-in general, whereas energy and danceability are quite more varying.
+in general, whereas `energy` and `danceability` are quite more varying.
 
 ![Danceability](img/features/dance.png)
 ![Energy](img/features/energy.png)
