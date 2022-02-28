@@ -54,15 +54,30 @@ genres2017 = getGenresOfYear(topOf2017, 2017)
 genres2016 = getGenresOfYear(topOf2016, 2016)
 
 allGenres = rbind(genres2016, genres2017, genres2018, genres2019, genres2020, genres2021)
+
+## PLOT
 library(plotly)
 
 plot <- ggplot(allGenres, aes(Year, count, fill=genre)) +
   geom_bar(position="fill", stat="identity") +
+  # geom_line(numberOfGenresPerYear, aes(Year, genreCount), stat="identity") +
   theme(
     legend.position = "none",
-    axis.text.x = element_blank(),
+    #axis.text.y = element_blank(),
   ) +
-  scale_x_continuous(break = (seq(2016, 2021, by = 1)))
+  ylab("Genres") +
+  scale_y_continuous(sec.axis = sec_axis(~.*180))
 
 interactivePlot <- ggplotly(plot)
 interactivePlot
+
+## collect data about genres
+genres <- allGenres$genre
+
+numberOfGenresPerYear = data.frame(Year = c(2016, 2017, 2018, 2019, 2020, 2021),
+                                   genreCount = c(nrow(genres2016), nrow(genres2017), nrow(genres2018), nrow(genres2019), nrow(genres2020), nrow(genres2021)))
+
+p <- ggplot(numberOfGenresPerYear, aes(Year, genreCount)) +
+  geom_line()
+
+ggplotly(p)
