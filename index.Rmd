@@ -6,7 +6,6 @@ output:
     storyboard: true
     theme: yeti
     self_contained: false
-runtime: shiny
 ---
 
 ```{r setup, include=FALSE}
