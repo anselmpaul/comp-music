@@ -1,6 +1,9 @@
 load("playlists.RData")
 library(ggplot2)
 library(plotly)
+library(GGally)
+library(grid)
+library(gridExtra)
 
 topOf2016$year <- 2016
 topOf2017$year <- 2017
@@ -8,37 +11,88 @@ topOf2018$year <- 2018
 topOf2019$year <- 2019
 topOf2020$year <- 2020
 topOf2021$year <- 2021
+timeCapsule$year <- "timeCapsule"
 
-topTen2016 <- head(topOf2016, 10)
-topTen2017 <- head(topOf2017, 10)
-topTen2018 <- head(topOf2018, 10)
-topTen2019 <- head(topOf2019, 10)
-topTen2020 <- head(topOf2020, 10)
-topTen2021 <- head(topOf2021, 10)
-
-allTopTen <- rbind(topTen2016, topTen2017, topTen2018, topTen2019, topTen2020, topTen2021)
-# danceability
-# energy
+## danceability
+## energy
 # key 
 # loudness
 # mode
-# speechiness
+## speechiness
 # acousticness
 # instrumentalness
-# liveness
+## liveness
 # tempo
-# valence
+## valence
 
-#timeCapsule <- get_playlist_audio_features("", "5hb3DGs2AGTl4jfXzM6lRF")
-timeCapsule$rank <- 1:nrow(timeCapsule)
+getMediansOfPlaylist <- function(playlist) {
+  medianPlaylist <- playlist %>%
+    summarize(
+      medianDance = median(danceability),
+      medianEnergy = median(energy),
+      medianSpeech = median(speechiness),
+      medianLive = median(liveness),
+      medianValence = median(valence),
+      year = max(year)
+    )
+}
 
-allTops <- rbind(topOf2016, topOf2017, topOf2018, topOf2019, topOf2020, topOf2020, topOf2021)
+median2016 <- getMediansOfPlaylist(topOf2016)
+median2017 <- getMediansOfPlaylist(topOf2017)
+median2018 <- getMediansOfPlaylist(topOf2018)
+median2019 <- getMediansOfPlaylist(topOf2019)
+median2020 <- getMediansOfPlaylist(topOf2020)
+median2021 <- getMediansOfPlaylist(topOf2021)
+medianTC <- getMediansOfPlaylist(timeCapsule)
 
-# , size= (100 - rank)
-featuresPlot <- ggplot(allTops, aes(rank, valence, color=playlist_name)) +
-  geom_point(alpha= 0.6,  size=3) #+
-  #geom_line()
+allMedians <- rbind(median2016, median2017, median2018, median2019, median2020, median2021, medianTC)
 
-ggplotly(featuresPlot)
+p <- ggparcoord(allMedians,
+                columns = 1:5, groupColumn = 6,
+                scale="uniminmax",
+)
 
+#ggplotly(p)
+
+p1 <- ggplot(allMedians, aes(year, medianDance)) +
+  ylim(0, 1) +
+  geom_line(aes(x=year, y=medianDance, group = 1, color="Danceability")) +
+  geom_line(aes(x=year, y=medianEnergy, group = 1, color="Energy")) +
+  geom_line(aes(x=year, y=medianSpeech, group = 1, color="Speechiness")) +
+  geom_line(aes(x=year, y=medianLive, group = 1, color="Liveness")) +
+  geom_line(aes(x=year, y=medianValence, group = 1, color="Valence"))
+
+getAveragePlaylist <- function(playlist) {
+  avgPlaylist <- playlist %>%
+    summarize(
+      avgDance = mean(danceability),
+      avgEnergy = mean(energy),
+      avgLiveness = mean(liveness),
+      avgSpeech = mean(speechiness),
+      avgValence = mean(valence),
+      year = max(year)
+    )
   
+  return(avgPlaylist)
+}
+
+avg2016 <- getAveragePlaylist(topOf2016)
+avg2017 <- getAveragePlaylist(topOf2017)
+avg2018 <- getAveragePlaylist(topOf2018)
+avg2019 <- getAveragePlaylist(topOf2019)
+avg2020 <- getAveragePlaylist(topOf2020)
+avg2021 <- getAveragePlaylist(topOf2021)
+avgTC <- getAveragePlaylist(timeCapsule)
+
+allAvg = rbind(avg2016, avg2017, avg2018, avg2019, avg2020, avg2021, avgTC)
+
+p2 <- ggplot(allAvg, aes(year)) +
+  ylim(0, 1) + 
+  geom_line(aes(x=year, y=avgDance, group = 1, color="Danceability")) +
+  geom_line(aes(x=year, y=avgEnergy, group = 1, color="Energy")) +
+  geom_line(aes(x=year, y=avgSpeech, group = 1, color="Speechiness")) +
+  geom_line(aes(x=year, y=avgLiveness, group = 1, color="Liveness")) +
+  geom_line(aes(x=year, y=avgValence, group = 1, color="Valence")) 
+
+p2
+#grid.arrange(p1, p2, ncol = 2)

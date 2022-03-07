@@ -5,14 +5,48 @@ date: "18-2-2022"
 output: 
   flexdashboard::flex_dashboard:
     storyboard: true
+    theme: yeti
+    self_contained: false
+runtime: shiny
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-### A Blast from the Past - Analyzing my best of the last 6 years
+```{r global, include=FALSE}
+# load libs for the whole dasbhoard
+library(ggplot2)
+library(tidyverse)
+library(spotifyr)
+library(compmus)
+library(grid)
+library(gridExtra)
+```
 
+
+### *Flashy* Self Similarity Matrices 
+
+```{r echo=FALSE}
+load("flashSSM.RData")
+grid.arrange(pitchesSSMFlashPlotSections, timbreSSMFlashPlotSections, pitchesSSMFlashPlotBeats, timbreSSMFlashPlotBeats, ncol = 2, nrow = 2,top = "Flash - Lewis OfMan")
+
+```
+
+***
+
+For an in-depth self-similarity analysis I selected my top song of 2020. Looking at the pitches in a "coarse" granularity (looking at segments), you can already make out some highlights like lines, but only when increasing the level of detail to beats, we start to see a very thorough checkerboard pattern throughout the whole song. You can also hear this pattern-change in the beat throughout the song.
+
+The horizontal and vertical line at the 60s mark resembles the sudden stop of the synthesizer (and only drums playing). Again, at 2:20m (or 140s), the synthesizer fades out almost completely, only leaving cowbells and drums - this time it takes a little more time for the synth to come back.
+
+The timbre plot doesn't show as clear results as the pitches - there's a small checker board pattern near the center, but not much else to see here.
+
+
+
+<iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/52d8baQxvV3AkHcAyXCkkO?utm_source=generator" width="100%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+
+
+### A Blast from the Past - Analyzing my best of the last 6 years
 
 #### The Corpus
 
@@ -24,8 +58,10 @@ The corpus is the dataset of music I will analyze over the coming weeks. I decid
 - [YourTopSongs2018](https://open.spotify.com/playlist/1mgY2xI49CWUfBpNzzidQO)
 - [YourTopSongs2017](https://open.spotify.com/playlist/1xgUVZdrris3opd6rW6TSX)
 - [YourTopSongs2016](https://open.spotify.com/playlist/0aiaCO6mk6bEPPDErC9oFp)
-- [YourTimeCapsule](https://open.spotify.com/playlist/5hb3DGs2AGTl4jfXzM6lRF) 
+- [YourTimeCapsule](https://open.spotify.com/playlist/5hb3DGs2AGTl4jfXzM6lRF)
 
+
+<iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/5hb3DGs2AGTl4jfXzM6lRF?utm_source=generator" width="100%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
 
 #### Motivation
 This dataset consists of 650 songs over a span of six years. I'm interested if and how my taste and music has changed, if there are trends which could correlate with events in my life, and if I can uncover the recipe for the "Time Capsule" Playlist. How does the distribution between genres shift? Are there artists that stay consistently throughout the years, are there "rising stars"?
@@ -61,6 +97,14 @@ As (a-)typical songs I have selected the first and last song of the six yearly p
 
 ### Visualisation | Genre Evolution and Feature Rankings
 
+
+```{r echo=FALSE}
+load("GenreEvolution.RData")
+interactivePlot
+
+```
+***
+
 #### Genre Evolution
 
 First I wanted to explore the shifts in genre distribution over the years. 
@@ -73,19 +117,10 @@ easily derive shifts in simple terms like "shifted from rock to pop". For this, 
 have to first simplify the genres (e.g. grouping "deep house", "deep euro house",
  "classic house" etc. all under "house"). Nonetheless it's easy to see that there is
  some change between the years.
- 
- ***
-
-```{r echo=FALSE}
-load("dump.RData")
-interactivePlot
-
-```
-***
- 
 
 
- #### Do Features influence Rank?
+
+### Do Features Influence Rank?
 
 Since the playlists include a ranking of 1 - 100, I wondered if there are any features 
 that show a clear influence on their ranking. I mapped all track features 
@@ -105,17 +140,73 @@ in general, whereas `energy` and `danceability` are quite more varying.
 
 ### Live from Odesza - A chroma comparison
 
-#### Live vs. Studio
-
-For a chromagram analysis I picked the song "IPlayYouListen" from ODESZA. A live performance of this piece is part of my corpus. I compared the live version (4:29) to the studio recording (4:42).
-
-***
 
 ![](img/odesza-dtw-chebyshev.png)
 
 ***
 
+#### Live vs. Studio
+
+
+For a chromagram analysis I picked the song "IPlayYouListen" from ODESZA. A live performance of this piece is part of my corpus. I compared the live version (4:29) to the studio recording (4:42).
+
 In the plot we can see that the two recordings do not align perfectly. Instead, there are "blocks" of alignment.
+
+### Best of Chroma 
+
+
+
+
+```{r out.width="100%", fig.height=2, echo=FALSE}
+load("bestofChromas.RData")
+
+drawPlot <- function(year) {
+  ggplot(unnest(bestOfChromas[year, "chromas"]),
+     aes(
+       x = start + duration / 2,
+       width = duration,
+       y = pitch_class,
+       fill = value
+     )
+) +
+geom_tile() +
+labs(x = "Time (s)", y = NULL, fill = "Magnitude") +
+theme_minimal() +
+theme(legend.position = "none") +
+scale_fill_viridis_c() +
+ggtitle(bestOfChromas[year, "years"])
+}
+
+drawPlot(1)
+drawPlot(2)
+drawPlot(3)
+drawPlot(4)
+drawPlot(5)
+drawPlot(6)
+
+
+
+```
+
+***
+
+
+Let's have a loot at the chromagrams of the top hits of each year. You can listen to the songs with the player below.
+
+Typical for hip-hop songs, *Never Learn - Brother Ali (2017)* and *Fernsehturm - Gossenboss mit Zett (2021)* show a very regular pattern throughout the whole song, since there is no recurring chorus or similar. 
+
+In *Flash - Lewis OfMan (2020)* you can very clearly see the alternating G and Gminor, which one can hear in the rhythm of the song as well.
+
+*ToDo 2016, 2018, 2019*
+
+*Help Me Loose My Mind - Disclore, London Grammar (2016)*
+
+*My Life - ZHU, Tame Impala (2018)*
+
+*High Hopes - Rhizomatique (2019)*
+
+<iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/6U9T757W62BA5W9T9G5lQh?utm_source=generator" width="100%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+
 
 ### Conclusion
 

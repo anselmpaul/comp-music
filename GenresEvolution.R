@@ -10,6 +10,8 @@ topOf2018 <- get_playlist_audio_features("", "1mgY2xI49CWUfBpNzzidQO")
 topOf2019 <- get_playlist_audio_features("", "6pHwUhsAgex7HmE53zulm4")
 topOf2020 <- get_playlist_audio_features("", "4MMsv9uHzs4yr8YAIRMPfD")
 topOf2021 <- get_playlist_audio_features("", "79X273LI34tXLJRXNLIiIz")
+timeCapsule <- get_playlist_audio_features("", "5hb3DGs2AGTl4jfXzM6lRF")
+
 
 getSingleArtistGenres = function(artistId) {
   artist <- get_artist(artistId)
@@ -52,8 +54,9 @@ genres2019 = getGenresOfYear(topOf2019, 2019)
 genres2018 = getGenresOfYear(topOf2018, 2018)
 genres2017 = getGenresOfYear(topOf2017, 2017)
 genres2016 = getGenresOfYear(topOf2016, 2016)
+genresTimeCapsule = getGenresOfYear(timeCapsule, "timeCapsule")
 
-allGenres = rbind(genres2016, genres2017, genres2018, genres2019, genres2020, genres2021)
+allGenres = rbind(genres2016, genres2017, genres2018, genres2019, genres2020, genres2021, genresTimeCapsule)
 
 ## PLOT
 library(plotly)
@@ -72,12 +75,12 @@ interactivePlot <- ggplotly(plot)
 interactivePlot
 
 ## collect data about genres
-genres <- allGenres$genre
-
-numberOfGenresPerYear = data.frame(Year = c(2016, 2017, 2018, 2019, 2020, 2021),
-                                   genreCount = c(nrow(genres2016), nrow(genres2017), nrow(genres2018), nrow(genres2019), nrow(genres2020), nrow(genres2021)))
-
-p <- ggplot(numberOfGenresPerYear, aes(Year, genreCount)) +
-  geom_line()
-
-ggplotly(p)
+# genres <- allGenres$genre
+# 
+# numberOfGenresPerYear = data.frame(Year = c(2016, 2017, 2018, 2019, 2020, 2021),
+#                                    genreCount = c(nrow(genres2016), nrow(genres2017), nrow(genres2018), nrow(genres2019), nrow(genres2020), nrow(genres2021)))
+# 
+# p <- ggplot(numberOfGenresPerYear, aes(Year, genreCount)) +
+#   geom_line()
+# 
+# ggplotly(p)
