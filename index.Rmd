@@ -22,6 +22,7 @@ library(spotifyr)
 library(compmus)
 library(grid)
 library(gridExtra)
+load("data/Featuresv2.RData")
 ```
 
 # WIP 
@@ -149,19 +150,68 @@ have to first simplify the genres (e.g. grouping "deep house", "deep euro house"
 
 ## Column 1 {.tabset data-width="650"}
 
-### Plots will go here
 
-### For each
 
-### Feature
+### Danceability
+```{r echo=FALSE}
+danceabilityPlot
+```
 
-### I want a tab
+### energy
+```{r echo=FALSE}
+energyPlot
+```
+
+### key
+```{r echo=FALSE}
+keyPlot
+```
+
+### loudness
+```{r echo=FALSE}
+loudnessPlot
+```
+
+### mode
+```{r echo=FALSE}
+modePlot
+```
+
+### speechiness
+```{r echo=FALSE}
+speechinessPlot
+```
+
+### acousticness
+```{r echo=FALSE}
+acousticnessPlot
+```
+
+### instrumentalness
+```{r echo=FALSE}
+instrumentalnessPlot
+```
+
+### liveness
+```{r echo=FALSE}
+livenessPlot
+```
+
+### tempo
+```{r echo=FALSE}
+tempoPlot
+```
+
+### valence
+```{r echo=FALSE}
+valencePlot
+```
 
 ## Column 2 
 
 ###
 
-Will have a description
+update description
 
 Since the playlists include a ranking of 1 - 100, I wondered if there are any features 
 that show a clear influence on their ranking. I mapped all track features 
@@ -173,11 +223,6 @@ charts below:
 What these plots show are different trends: low `speechiness` and `liveness` 
 in general, whereas `energy` and `danceability` are quite more varying.
 
-![Danceability](img/features/dance.png)
-![Energy](img/features/energy.png)
-![Liveness](img/features/liveness.png)
-![Loudness](img/features/loudness.png)
-![Speechiness](img/features/speechiness.png)
 
 # Live from Odesza - A chroma comparison
 
