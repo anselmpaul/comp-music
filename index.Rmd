@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Spotify Unwrapped"
 author: "anselmpaul"
 output: 
   flexdashboard::flex_dashboard:
