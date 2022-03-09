@@ -1,5 +1,5 @@
 ---
-title: "comp-music"
+title: ""
 author: "anselmpaul"
 output: 
   flexdashboard::flex_dashboard:
@@ -10,6 +10,7 @@ output:
     orientation: columns
     vertical_layout: fill
     storyboard: true
+    favicon: favicon.ico
 ---
 
 ```{r setup, include=FALSE}
