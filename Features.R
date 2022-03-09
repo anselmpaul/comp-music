@@ -1,9 +1,12 @@
 load("playlists.RData")
+library(dplyr)
 library(ggplot2)
 library(plotly)
 library(GGally)
 library(grid)
+library(tidyverse)
 library(gridExtra)
+
 
 topOf2016$year <- 2016
 topOf2017$year <- 2017
@@ -12,6 +15,9 @@ topOf2019$year <- 2019
 topOf2020$year <- 2020
 topOf2021$year <- 2021
 timeCapsule$year <- "timeCapsule"
+
+allTops <- rbind(topOf2016, topOf2017, topOf2018, topOf2019, topOf2020, topOf2021)
+test <- allTops %>% group_by("rank")
 
 ## danceability
 ## energy
@@ -24,6 +30,8 @@ timeCapsule$year <- "timeCapsule"
 ## liveness
 # tempo
 ## valence
+
+ggplot(allTops, aes())
 
 getMediansOfPlaylist <- function(playlist) {
   medianPlaylist <- playlist %>%

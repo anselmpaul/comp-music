@@ -3,7 +3,9 @@ title: "comp-music"
 author: "anselmpaul"
 output: 
   flexdashboard::flex_dashboard:
-    theme: yeti
+    theme: 
+      version: 4
+      bootswatch: yeti
     self_contained: false
     orientation: columns
     vertical_layout: fill
@@ -151,35 +153,9 @@ have to first simplify the genres (e.g. grouping "deep house", "deep euro house"
 ## Column 1 {.tabset data-width="650"}
 
 
-
-### Danceability
+### instrumentalness
 ```{r echo=FALSE}
-danceabilityPlot
-```
-
-### energy
-```{r echo=FALSE}
-energyPlot
-```
-
-### key
-```{r echo=FALSE}
-keyPlot
-```
-
-### loudness
-```{r echo=FALSE}
-loudnessPlot
-```
-
-### mode
-```{r echo=FALSE}
-modePlot
-```
-
-### speechiness
-```{r echo=FALSE}
-speechinessPlot
+instrumentalnessPlot
 ```
 
 ### acousticness
@@ -187,23 +163,50 @@ speechinessPlot
 acousticnessPlot
 ```
 
-### instrumentalness
-```{r echo=FALSE}
-instrumentalnessPlot
+
+### energy
+```{r echo=FALSE, }
+energyPlot
 ```
 
-### liveness
-```{r echo=FALSE}
-livenessPlot
+<!-- ### key -->
+<!-- ```{r echo=FALSE} -->
+<!-- keyPlot -->
+<!-- ``` -->
+
+<!-- ### loudness -->
+<!-- ```{r echo=FALSE} -->
+<!-- loudnessPlot -->
+<!-- ``` -->
+
+<!-- ### mode -->
+<!-- ```{r echo=FALSE} -->
+<!-- modePlot -->
+<!-- ``` -->
+
+### speechiness
+```{r echo=FALSE, }
+speechinessPlot
 ```
+
 
 ### tempo
-```{r echo=FALSE}
+```{r echo=FALSE, }
 tempoPlot
 ```
 
+### danceability
+```{r echo=FALSE, }
+danceabilityPlot
+```
+
+### liveness
+```{r echo=FALSE, }
+livenessPlot
+```
+
 ### valence
-```{r echo=FALSE}
+```{r echo=FALSE, }
 valencePlot
 ```
 
@@ -211,18 +214,20 @@ valencePlot
 
 ###
 
-update description
+Since the playlists include a ranking of 1 - 100, I wondered if there are any 
+features  that show a clear influence on their ranking. I mapped all track
+features (danceability, energy, key, loudness, mode, speechiness, acousticness, 
+instrumentalness, liveness, tempo, valence) against their rank.
 
-Since the playlists include a ranking of 1 - 100, I wondered if there are any features 
-that show a clear influence on their ranking. I mapped all track features 
-(danceability, energy, key, loudness, mode, speechiness, acousticness, 
-instrumentalness, liveness, tempo, valence) against the ranking to no clear result -
-it appears that there is no correlation between the ranking and the features. Some
-charts below:
+Where as some features do not appear to correlate with the rank 
+(`danceability`, `liveness`, `valence`), others clearly do: 
 
-What these plots show are different trends: low `speechiness` and `liveness` 
-in general, whereas `energy` and `danceability` are quite more varying.
+`instrumentalness` lost its popularity over time. Still being on the rise in 2016,
+it flattened out over the years and started declining in 2020 and 2021.
 
+`acousticness` also lost on importance in the past two years, whereas `speechiness` 
+made a comeback in 2021 - I would attribute this to a higher proportion of hip-hop
+or rap songs.
 
 # Live from Odesza - A chroma comparison
 
