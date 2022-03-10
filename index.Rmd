@@ -3,14 +3,12 @@ title: "Spotify Unwrapped"
 author: "anselmpaul"
 output: 
   flexdashboard::flex_dashboard:
-    theme: 
-      version: 4
-      bootswatch: yeti
     self_contained: false
     orientation: columns
     vertical_layout: fill
     storyboard: true
     favicon: favicon.ico
+    
 ---
 
 ```{r setup, include=FALSE}
@@ -28,18 +26,22 @@ library(gridExtra)
 load("data/Featuresv2.RData")
 ```
 
-# WIP 
+# Standard Deviation 
 
 ## Column 1 {data-width="650"}
 
-### Headline 1
-some plot here
+### 
+```{r echo=FALSE}
+load("data/sdPlot.RData")
+getSdPlot()
+```
 
 ## Column 2 {data-width="350"}
 
 ###
 
-description here
+Comparing time campsule, best of 2021, and best of 2016.
+TODO: go into detail
 
 # *Flashy* Self Similarity Matrices 
 
