@@ -8,7 +8,7 @@ output:
     vertical_layout: fill
     storyboard: true
     favicon: favicon.ico
-    
+    css: styles/styles.css
 ---
 
 ```{r setup, include=FALSE}
@@ -26,48 +26,12 @@ library(gridExtra)
 load("data/Featuresv2.RData")
 ```
 
-# Standard Deviation 
+# 5 - Tempograms
 
 ## Column 1 {data-width="650"}
 
-### 
-```{r echo=FALSE}
-load("data/sdPlot.RData")
-getSdPlot()
-```
-
 ## Column 2 {data-width="350"}
 
-###
-
-Comparing time campsule, best of 2021, and best of 2016.
-TODO: go into detail
-
-# *Flashy* Self Similarity Matrices 
-
-## Column 1 {data-width="650"}
-
-### Self-Similarity Matrices
-
-```{r echo=FALSE}
-load("data/flashSSM.RData")
-grid.arrange(pitchesSSMFlashPlotSections, timbreSSMFlashPlotSections, pitchesSSMFlashPlotBeats, timbreSSMFlashPlotBeats, ncol = 2, nrow = 2,top = "Flash - Lewis OfMan")
-
-```
-
-## Column 2 {data-width="350"}
-
-### Flash - Lewis OfMan
-
-For an in-depth self-similarity analysis I selected my top song of 2020. Looking at the pitches in a "coarse" granularity (looking at segments), you can already make out some highlights like lines, but only when increasing the level of detail to beats, we start to see a very thorough checkerboard pattern throughout the whole song. You can also hear this pattern-change in the beat throughout the song.
-
-The horizontal and vertical line at the 60s mark resembles the sudden stop of the synthesizer (and only drums playing). Again, at 2:20m (or 140s), the synthesizer fades out almost completely, only leaving cowbells and drums - this time it takes a little more time for the synth to come back.
-
-The timbre plot doesn't show as clear results as the pitches - there's a small checker board pattern near the center, but not much else to see here.
-
-
-
-<iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/52d8baQxvV3AkHcAyXCkkO?utm_source=generator" width="100%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
 
 
 # A Blast from the Past - Analyzing my best of the last 6 years
@@ -121,7 +85,7 @@ As (a-)typical songs I have selected the first and last song of the six yearly p
 | Faded - Original Mix | ZHU | 2017|
 |Verschwende mich | OK KID | 2016|
 
-# Genre Evolution
+# 1 - Genre Evolution
 
 ## Column 1 {data-width="650"}
 
@@ -151,7 +115,7 @@ have to first simplify the genres (e.g. grouping "deep house", "deep euro house"
 
 
 
-# Do Features Influence Rank?
+# 1 - Do Features Influence Rank?
 
 ## Column 1 {.tabset data-width="650"}
 
@@ -232,7 +196,7 @@ it flattened out over the years and started declining in 2020 and 2021.
 made a comeback in 2021 - I would attribute this to a higher proportion of hip-hop
 or rap songs.
 
-# Live from Odesza - A chroma comparison
+# 2 - Live from Odesza - A chroma comparison
 
 ## Column 1 {data-width="650"}
 
@@ -304,6 +268,50 @@ In *Flash - Lewis OfMan (2020)* you can very clearly see the alternating G and G
 *High Hopes - Rhizomatique (2019)*
 
 <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/6U9T757W62BA5W9T9G5lQh?utm_source=generator" width="100%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+
+# 3 - *Flashy* Self Similarity Matrices 
+
+## Column 1 {data-width="650"}
+
+### Self-Similarity Matrices
+
+```{r echo=FALSE}
+load("data/flashSSM.RData")
+grid.arrange(pitchesSSMFlashPlotSections, timbreSSMFlashPlotSections, pitchesSSMFlashPlotBeats, timbreSSMFlashPlotBeats, ncol = 2, nrow = 2,top = "Flash - Lewis OfMan")
+
+```
+
+## Column 2 {data-width="350"}
+
+### Flash - Lewis OfMan
+
+For an in-depth self-similarity analysis I selected my top song of 2020. Looking at the pitches in a "coarse" granularity (looking at segments), you can already make out some highlights like lines, but only when increasing the level of detail to beats, we start to see a very thorough checkerboard pattern throughout the whole song. You can also hear this pattern-change in the beat throughout the song.
+
+The horizontal and vertical line at the 60s mark resembles the sudden stop of the synthesizer (and only drums playing). Again, at 2:20m (or 140s), the synthesizer fades out almost completely, only leaving cowbells and drums - this time it takes a little more time for the synth to come back.
+
+The timbre plot doesn't show as clear results as the pitches - there's a small checker board pattern near the center, but not much else to see here.
+
+
+
+<iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/52d8baQxvV3AkHcAyXCkkO?utm_source=generator" width="100%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+
+
+# 4 - Standard Deviation 
+
+## Column 1 {data-width="650"}
+
+### 
+```{r echo=FALSE}
+load("data/sdPlot.RData")
+getSdPlot()
+```
+
+## Column 2 {data-width="350"}
+
+###
+
+Comparing time campsule, best of 2021, and best of 2016.
+TODO: go into detail
 
 
 # Conclusion
