@@ -30,9 +30,11 @@ load("data/Featuresv2.RData")
 
 ## Column 1 {data-width="650"}
 
+### Tempo tempo
+
 ## Column 2 {data-width="350"}
 
-
+### zack zack
 
 # A Blast from the Past - Analyzing my best of the last 6 years
 
