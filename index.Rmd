@@ -26,43 +26,47 @@ library(gridExtra)
 load("data/01_Featuresv2.RData")
 ```
 
-# 5 - Tempograms
+# 6 - Clustering
 
 ## Column 1 {data-width="650" .tabset}
 
-### Quick Musical Doodles
+### Complete Clustering
 
 ```{r echo=FALSE}
-load("data/05_tempoGrams.RData")
-grid.arrange(tempoGram, cyclicTempoGram)
+load("data/06_dendrogram.RData")
+topTenDendroComplete
 
 ```
 
-### BPMs throughout the years
+
+### Average Clustering
+
 ```{r echo=FALSE}
-load("data/05_tempoGrams.RData")
-bpmHisto
+load("data/06_dendrogram.RData")
+topTenDendroAverage
+
+```
+
+
+### Heatmap
+
+```{r echo=FALSE}
+load("data/06_dendrogram.RData")
+topTenHeatmap
+
 ```
 
 ## Column 2 {data-width="350"}
 
-### Beat Tracking
+### Clustering the top tens
 
-BPMs can turn into false friends quickly. Spotify claims that the song "Quick Musical
-Doodles" has a BPM of 170 - sounds fast, right? Take a listen and see if you agree.
+For the clustering, I selected the top ten song of each year, resulting in 59 (
+one duplicate) songs. I wondered if the clusters would be obvious in a sense of
+genre or similar. For the clustering I used track level features. 
 
-<iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/7tZdkPtebOG29TzPPHlsem?utm_source=generator" width="100%" height="80" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
-
-Looking at the tempogram at top we can see where the value comes from.
-Spotify estimates the tempo to be either 170bpm or even higher, around 340bpm, which
-would be insane. Looking at the Cyclic tempogram below, we get a more accurate reading:
-BPM of 85. That sounds more reasonable.
-
-#### Favorite beats
-
-On the second tab there's a histogram of the amount of songs per bpm per playlist of my corpus.
-We can see the expected peak at around 120bpm.
-
+What I found to be interesting that average and complete clustering turn out really
+similar results - both fail to integrate the same five songs into clusters and
+attach at them in the end, and it appears that they both cluster the same songs together.
 
 
 
@@ -326,6 +330,45 @@ getSdPlot()
 
 Comparing time campsule, best of 2021, and best of 2016.
 TODO: go into detail
+
+# 5 - Tempograms
+
+## Column 1 {data-width="650" .tabset}
+
+### Quick Musical Doodles
+
+
+```{r echo=FALSE}
+load("data/05_tempoGrams.RData")
+grid.arrange(tempoGram, cyclicTempoGram)
+
+```
+
+### BPMs throughout the years
+```{r echo=FALSE}
+load("data/05_tempoGrams.RData")
+bpmHisto
+```
+
+## Column 2 {data-width="350"}
+
+### Beat Tracking
+
+BPMs can turn into false friends quickly. Spotify claims that the song "Quick Musical
+Doodles" has a BPM of 170 - sounds fast, right? Take a listen and see if you agree.
+
+<iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/7tZdkPtebOG29TzPPHlsem?utm_source=generator" width="100%" height="80" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+
+Looking at the tempogram at top we can see where the value comes from.
+Spotify estimates the tempo to be either 170bpm or even higher, around 340bpm, which
+would be insane. Looking at the Cyclic tempogram below, we get a more accurate reading:
+BPM of 85. That sounds more reasonable.
+
+#### Favorite beats
+
+On the second tab there's a histogram of the amount of songs per bpm per playlist of my corpus.
+We can see the expected peak at around 120bpm.
+
 
 
 # Conclusion
