@@ -26,48 +26,6 @@ library(gridExtra)
 load("data/01_Featuresv2.RData")
 ```
 
-# 6 - Clustering
-
-## Column 1 {data-width="650" .tabset}
-
-### Complete Clustering
-
-```{r echo=FALSE}
-load("data/06_dendrogram.RData")
-topTenDendroComplete
-
-```
-
-
-### Average Clustering
-
-```{r echo=FALSE}
-load("data/06_dendrogram.RData")
-topTenDendroAverage
-
-```
-
-
-### Heatmap
-
-```{r echo=FALSE}
-load("data/06_dendrogram.RData")
-topTenHeatmap
-
-```
-
-## Column 2 {data-width="350"}
-
-### Clustering the top tens
-
-For the clustering, I selected the top ten song of each year, resulting in 59 (
-one duplicate) songs. I wondered if the clusters would be obvious in a sense of
-genre or similar. For the clustering I used track level features. 
-
-What I found to be interesting that average and complete clustering turn out really
-similar results - both fail to integrate the same five songs into clusters and
-attach at them in the end, and it appears that they both cluster the same songs together.
-
 
 
 # A Blast from the Past - Analyzing my best of the last 6 years
@@ -369,6 +327,47 @@ BPM of 85. That sounds more reasonable.
 On the second tab there's a histogram of the amount of songs per bpm per playlist of my corpus.
 We can see the expected peak at around 120bpm.
 
+# 6 - Clustering
+
+## Column 1 {data-width="650" .tabset}
+
+### Complete Clustering
+
+```{r echo=FALSE}
+load("data/06_dendrogram.RData")
+topTenDendroComplete
+
+```
+
+
+### Average Clustering
+
+```{r echo=FALSE}
+load("data/06_dendrogram.RData")
+topTenDendroAverage
+
+```
+
+
+### Heatmap
+
+```{r echo=FALSE}
+load("data/06_dendrogram.RData")
+topTenHeatmap
+
+```
+
+## Column 2 {data-width="350"}
+
+### Clustering the top tens
+
+For the clustering, I selected the top ten song of each year, resulting in 59 (
+one duplicate) songs. I wondered if the clusters would be obvious in a sense of
+genre or similar. For the clustering I used track level features. 
+
+What I found to be interesting that average and complete clustering turn out really
+similar results - both fail to integrate the same five songs into clusters and
+attach at them in the end, and it appears that they both cluster the same songs together.
 
 
 # Conclusion
