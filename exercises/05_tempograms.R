@@ -1,25 +1,29 @@
 library(tidyverse)
 library(spotifyr)
 library(compmus)
+library(plotly)
 
 load("data/playlists.RData")
 playlist <- topOf2021
 
-playlist$artist = sapply(playlist$track.artists, function(mat) unlist(mat[3]))
+test <- get_playlist_audio_features("", "4CUefApxZbdCQS1cWFKIVo")
+
+topOf2021$artist = sapply(playlist$track.artists, function(mat) unlist(mat[3]))
 topOf2020$artist = sapply(topOf2020$track.artists, function(mat) unlist(mat[3]))
 topOf2019$artist = sapply(topOf2019$track.artists, function(mat) unlist(mat[3]))
 topOf2018$artist = sapply(topOf2018$track.artists, function(mat) unlist(mat[3]))
 topOf2017$artist = sapply(topOf2017$track.artists, function(mat) unlist(mat[3]))
 topOf2016$artist = sapply(topOf2016$track.artists, function(mat) unlist(mat[3]))
 
-playlist %>% ggplot(aes(x = tempo)) + 
+
+topOf2021 %>% ggplot(aes(x = tempo)) + 
   geom_density()
 
 topOf2016 %>% ggplot(aes(x = tempo)) + 
   geom_density()
 
 # slowest
-playlist %>% arrange(tempo) %>% slice(1:10) %>% select(artist, track.name, tempo)
+topOf2021 %>% arrange(tempo) %>% slice(1:10) %>% select(artist, track.name, tempo)
 topOf2020 %>% arrange(tempo) %>% slice(1:10) %>% select(artist, track.name, tempo)
 topOf2019 %>% arrange(tempo) %>% slice(1:10) %>% select(artist, track.name, tempo)
 topOf2018 %>% arrange(tempo) %>% slice(1:10) %>% select(artist, track.name, tempo)
@@ -27,7 +31,7 @@ topOf2017 %>% arrange(tempo) %>% slice(1:10) %>% select(artist, track.name, temp
 topOf2016 %>% arrange(tempo) %>% slice(1:10) %>% select(artist, track.name, tempo)
 
 # fastet
-playlist %>% arrange(desc(tempo)) %>% slice(1:10) %>% select(artist, track.name, tempo)
+topOf2021 %>% arrange(desc(tempo)) %>% slice(1:10) %>% select(artist, track.name, tempo)
 topOf2020 %>% arrange(desc(tempo)) %>% slice(1:10) %>% select(artist, track.name, tempo)
 topOf2019 %>% arrange(desc(tempo)) %>% slice(1:10) %>% select(artist, track.name, tempo)
 topOf2018 %>% arrange(desc(tempo)) %>% slice(1:10) %>% select(artist, track.name, tempo)
@@ -90,6 +94,13 @@ getCyclicTempogram <- function(songId) {
 
 # this might be interesting 
 # quick musical doodles  7pe2OKY04MW1Cunyqrai83
+#getNovelyPlot("7pe2OKY04MW1Cunyqrai83")
 
-#getTempogram("7pe2OKY04MW1Cunyqrai83")
-#getCyclicTempogram("7pe2OKY04MW1Cunyqrai83")
+tempoGram <- getTempogram("7pe2OKY04MW1Cunyqrai83")
+cyclicTempoGram <- getCyclicTempogram("7pe2OKY04MW1Cunyqrai83")
+
+allTops <- rbind(topOf2016, topOf2017, topOf2018, topOf2019, topOf2020, topOf2021)
+bpmHisto <- ggplotly(ggplot(allTops, aes(fill=playlist_name , x=tempo)) + 
+              geom_histogram() +
+             facet_grid(rows = vars(playlist_name)))
+bpmHisto

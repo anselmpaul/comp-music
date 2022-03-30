@@ -281,7 +281,7 @@ The plot doesn't show as clear results as the pitches - there's a small checker 
 <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/52d8baQxvV3AkHcAyXCkkO?utm_source=generator" width="100%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
 
 
-# 4 - Standard Deviation
+# 4 - Track Feature Statistics
 
 ## Column 1 {data-width="650"}
 
@@ -298,7 +298,7 @@ getSdPlot()
 Comparing time campsule, best of 2021, and best of 2016.
 TODO: go into detail
 
-# 5 - Tempograms
+# 5 - Tempo Tempo Tempoooo!
 
 ## Column 1 {data-width="650" .tabset}
 
@@ -333,8 +333,9 @@ BPM of 85. That sounds more reasonable.
 
 #### Favorite beats
 
-On the second tab there's a histogram of the amount of songs per bpm per playlist of my corpus.
-We can see the expected peak at around 120bpm.
+On the second tab there's a histogram of the tempo distribution per year. The years
+2016 to 2019 we can see the somewhat expected peak around 120bpm. But in the more recent 
+years the distribution has evened out more, and a second peak around 94 bpm has shown up.
 
 # 6 - Clustering
 
@@ -357,6 +358,10 @@ topTenDendroAverage
 
 ```
 
+### Colorized - Playlist Clusters
+
+![](img/dendro.png)
+
 
 ### Heatmap
 
@@ -373,6 +378,16 @@ topTenHeatmap
 For the clustering, I selected the top ten song of each year, resulting in 59 (
 one duplicate) songs. I wondered if the clusters would be obvious in a sense of
 genre or similar. For the clustering I used track level features. 
+
+I wondered if the clustering would naturally recreate the playlist structures, and 
+if you look at the tab "Colorized - Playlist Clusters", you can see that it did to some
+extend! It often places songs from the same playlist next to each other and matches
+them on the first or second level.
+
+Additionally you can see that the songs from 2016 are only on the right half of the 
+dendrogram, whereas all other playlists are spread all over.
+
+
 
 What I found to be interesting that average and complete clustering turn out really
 similar results - both fail to integrate the same five songs into clusters and
