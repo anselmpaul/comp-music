@@ -43,7 +43,7 @@ This dataset consists of close to 600 songs over a span of six years. I'm intere
 
 A strength of this dataset is that it should be expressive - I can't find the exact number right now, but as far as I remember my "minutes of listening" per year are around 50.000 minutes/year. A weakness (or maybe visible trend?) could be that over the past two years I've shifted away from listening on Spotify exclusively to using SoundCloud specifically for listening to Techno & House.
 
-On the right you can see typical (Tops) and atypical (Flops) samples of the corpus
+On the right you can see typical (Tops) and atypical (Flops) samples of the corpus.
 
 
 ### Genre Evolution
@@ -86,12 +86,15 @@ Since the Spotify API doesn't provide the feature `genre` on a track level, but
 only for artists, I collected the genres of the artist(s) of each song. 
 
 Spotifys Genre Distinction is very detailed. There are over 700 distinct Genres 
-for 600 songs (since songs can fit multiple genres), which makes it hard to
-easily derive shifts in simple terms like "shifted from rock to pop". For this, I
-have to first simplify the genres (e.g. grouping "deep house", "deep euro house",
- "classic house" etc. all under "house"). Nonetheless it's easy to see that there is
- some change between the years.
-
+for the close to 600 songs in my corpus, since songs can fit multiple genres.
+This makes it a bit hard to easily derive shifts in simple terms like 
+"shifted from rock to pop". For this, I would have to first simplify the genres
+(e.g. grouping "deep house", "deep euro house", "classic house" etc. all under "house"). 
+Nonetheless it's easy to see that there is some change between the years. By hovering
+the graph you can explore the genres - there are too many to fit them into a 
+legend. When you look at the most right bar, the "timeCapsule" playlist, you can see
+that it does not continue with the trend of the bars, but rather resembles 2017 or 2018,
+showing that it apparently is orientated on previous years.
 
 
 # 1 - Do Features Influence Rank?
@@ -109,6 +112,10 @@ instrumentalnessPlot
 acousticnessPlot
 ```
 
+### speechiness
+```{r echo=FALSE, }
+speechinessPlot
+```
 
 ### energy
 ```{r echo=FALSE, }
@@ -129,11 +136,6 @@ energyPlot
 <!-- ```{r echo=FALSE} -->
 <!-- modePlot -->
 <!-- ``` -->
-
-### speechiness
-```{r echo=FALSE, }
-speechinessPlot
-```
 
 
 ### tempo
@@ -158,7 +160,7 @@ valencePlot
 
 ## Column 2
 
-###
+### Comparing the changes in feature distribution over time
 
 Since the playlists include a ranking of 1 - 100, I wondered if there are any
 features  that show a clear influence on their ranking. I mapped all track
@@ -175,11 +177,16 @@ it flattened out over the years and started declining in 2020 and 2021.
 made a comeback in 2021 - I would attribute this to a higher proportion of hip-hop
 or rap songs.
 
+It didn't make sense to plot the timeCapsule playlist into these comparisons: First
+it only consists of 50 songs instead of a 100, and as far as I can tell they are not
+ordered. Additionally I noticed that the playlist is ever changing, and spotify adds
+and removes songs over time.
+
 # 2 - Live from Odesza - A chroma comparison
 
 ## Column 1 {data-width="650" .tabset}
 
-### DTW
+### Dynamic Time Warping
 
 ```{r echo=FALSE}
 load("data/02_dtw.RData")
@@ -219,28 +226,30 @@ drawPlot(6)
 
 ## Column 2 {data-width="350"}
 
-### Live vs. Studio
+### Chroma Analysis
 
+#### Live vs. Studio
 
 For a chromagram analysis I picked the song "IPlayYouListen" from ODESZA. A live performance of this piece is part of my corpus. I compared the live version (4:29) to the studio recording (4:42).
 
 In the plot we can see that the two recordings do not align perfectly. Instead, there are "blocks" of alignment.
 
-### Best of Chroma
+<iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/4X0hePXqBlFkOZ9WWp5W1e?utm_source=generator" width="100%" height="80" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
 
-Let's have a look at the chromagrams of the top hits of each year. You can listen to the songs with the player below.
+<iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/3xhR3mClWXydDCByJxnOwY?utm_source=generator" width="100%" height="80" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+
+#### Best of Chroma
+
+Let's also have a look at the chromagrams of the top hits of each year. You can listen to the songs with the player below.
 
 Typical for hip-hop songs, *Never Learn - Brother Ali (2017)* and *Fernsehturm - Gossenboss mit Zett (2021)* show a very regular pattern throughout the whole song, since there is no recurring chorus or similar.
 
 In *Flash - Lewis OfMan (2020)* you can very clearly see the alternating G and Gminor, which one can hear in the rhythm of the song as well.
 
-*ToDo 2016, 2018, 2019*
+It is harder to make out patterns in the other songs. What is clearly visible in *Help Me Loose My Mind - Disclore, London Grammar (2016)* are the pauses of the beat before the chorus for about 10 seconds from 0:40 on and 2:00 on.
 
-*Help Me Loose My Mind - Disclore, London Grammar (2016)*
-
-*My Life - ZHU, Tame Impala (2018)*
-
-*High Hopes - Rhizomatique (2019)*
+I wasn't able to discover clear patterns for 2018 and 2019 (*My Life - ZHU, Tame Impala (2018)*,
+*High Hopes - Rhizomatique (2019)*)
 
 <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/6U9T757W62BA5W9T9G5lQh?utm_source=generator" width="100%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
 

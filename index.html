@@ -2663,7 +2663,7 @@ window.FlexDashboardComponents.push({
 <h4>Motivation</h4>
 <p>This dataset consists of close to 600 songs over a span of six years. I’m interested if and how my taste and music has changed, if there are trends which could correlate with events in my life, and if I can uncover the recipe for the “Time Capsule” Playlist. How does the distribution between genres shift? Are there artists that stay consistently throughout the years, are there “rising stars”?</p>
 <p>A strength of this dataset is that it should be expressive - I can’t find the exact number right now, but as far as I remember my “minutes of listening” per year are around 50.000 minutes/year. A weakness (or maybe visible trend?) could be that over the past two years I’ve shifted away from listening on Spotify exclusively to using SoundCloud specifically for listening to Techno &amp; House.</p>
-<p>On the right you can see typical (Tops) and atypical (Flops) samples of the corpus</p>
+<p>On the right you can see typical (Tops) and atypical (Flops) samples of the corpus.</p>
 </div>
 </div>
 <div id="genre-evolution" class="section level3">
@@ -2764,7 +2764,7 @@ window.FlexDashboardComponents.push({
 <div id="genre-evolution-1" class="section level3">
 <h3>Genre Evolution</h3>
 <p>Let’s have a look at the plot on the left. I wanted to explore the shifts in genre distribution over the years. Since the Spotify API doesn’t provide the feature <code>genre</code> on a track level, but only for artists, I collected the genres of the artist(s) of each song.</p>
-<p>Spotifys Genre Distinction is very detailed. There are over 700 distinct Genres for 600 songs (since songs can fit multiple genres), which makes it hard to easily derive shifts in simple terms like “shifted from rock to pop”. For this, I have to first simplify the genres (e.g. grouping “deep house”, “deep euro house”, “classic house” etc. all under “house”). Nonetheless it’s easy to see that there is some change between the years.</p>
+<p>Spotifys Genre Distinction is very detailed. There are over 700 distinct Genres for the close to 600 songs in my corpus, since songs can fit multiple genres. This makes it a bit hard to easily derive shifts in simple terms like “shifted from rock to pop”. For this, I would have to first simplify the genres (e.g. grouping “deep house”, “deep euro house”, “classic house” etc. all under “house”). Nonetheless it’s easy to see that there is some change between the years. By hovering the graph you can explore the genres - there are too many to fit them into a legend. When you look at the most right bar, the “timeCapsule” playlist, you can see that it does not continue with the trend of the bars, but rather resembles 2017 or 2018, showing that it apparently is orientated on previous years.</p>
 </div>
 </div>
 </div>
@@ -2786,12 +2786,19 @@ window.FlexDashboardComponents.push({
 </div>
 <p><img src="index_files/figure-html/unnamed-chunk-3-1.png" width="576" data-figure-id=fig2 /></p>
 </div>
+<div id="speechiness" class="section level3">
+<h3>speechiness</h3>
+<div class="knitr-options" data-fig-width="576" data-fig-height="460">
+
+</div>
+<p><img src="index_files/figure-html/unnamed-chunk-4-1.png" width="576" data-figure-id=fig3 /></p>
+</div>
 <div id="energy" class="section level3">
 <h3>energy</h3>
 <div class="knitr-options" data-fig-width="576" data-fig-height="460">
 
 </div>
-<p><img src="index_files/figure-html/unnamed-chunk-4-1.png" width="576" data-figure-id=fig3 /></p>
+<p><img src="index_files/figure-html/unnamed-chunk-5-1.png" width="576" data-figure-id=fig4 /></p>
 <!-- ### key -->
 <!-- ```{r echo=FALSE} -->
 <!-- keyPlot -->
@@ -2804,13 +2811,6 @@ window.FlexDashboardComponents.push({
 <!-- ```{r echo=FALSE} -->
 <!-- modePlot -->
 <!-- ``` -->
-</div>
-<div id="speechiness" class="section level3">
-<h3>speechiness</h3>
-<div class="knitr-options" data-fig-width="576" data-fig-height="460">
-
-</div>
-<p><img src="index_files/figure-html/unnamed-chunk-5-1.png" width="576" data-figure-id=fig4 /></p>
 </div>
 <div id="tempo" class="section level3">
 <h3>tempo</h3>
@@ -2843,12 +2843,13 @@ window.FlexDashboardComponents.push({
 </div>
 <div id="column-2-1" class="section level2">
 <h2>Column 2</h2>
-<div id="section" class="section level3">
-<h3></h3>
+<div id="comparing-the-changes-in-feature-distribution-over-time" class="section level3">
+<h3>Comparing the changes in feature distribution over time</h3>
 <p>Since the playlists include a ranking of 1 - 100, I wondered if there are any features that show a clear influence on their ranking. I mapped all track features (danceability, energy, key, loudness, mode, speechiness, acousticness, instrumentalness, liveness, tempo, valence) against their rank.</p>
 <p>Where as some features do not appear to correlate with the rank (<code>danceability</code>, <code>liveness</code>, <code>valence</code>), others clearly do:</p>
 <p><code>instrumentalness</code> lost its popularity over time. Still being on the rise in 2016, it flattened out over the years and started declining in 2020 and 2021.</p>
 <p><code>acousticness</code> also lost on importance in the past two years, whereas <code>speechiness</code> made a comeback in 2021 - I would attribute this to a higher proportion of hip-hop or rap songs.</p>
+<p>It didn’t make sense to plot the timeCapsule playlist into these comparisons: First it only consists of 50 songs instead of a 100, and as far as I can tell they are not ordered. Additionally I noticed that the playlist is ever changing, and spotify adds and removes songs over time.</p>
 </div>
 </div>
 </div>
@@ -2856,8 +2857,8 @@ window.FlexDashboardComponents.push({
 <h1>2 - Live from Odesza - A chroma comparison</h1>
 <div id="column-1-2" class="section level2 tabset" data-width="650">
 <h2 class="tabset">Column 1</h2>
-<div id="dtw" class="section level3">
-<h3>DTW</h3>
+<div id="dynamic-time-warping" class="section level3">
+<h3>Dynamic Time Warping</h3>
 <div class="knitr-options" data-fig-width="576" data-fig-height="460">
 
 </div>
@@ -2873,22 +2874,27 @@ window.FlexDashboardComponents.push({
 </div>
 <div id="column-2-2" class="section level2" data-width="350">
 <h2>Column 2</h2>
-<div id="live-vs.-studio" class="section level3">
-<h3>Live vs. Studio</h3>
+<div id="chroma-analysis" class="section level3">
+<h3>Chroma Analysis</h3>
+<div id="live-vs.-studio" class="section level4">
+<h4>Live vs. Studio</h4>
 <p>For a chromagram analysis I picked the song “IPlayYouListen” from ODESZA. A live performance of this piece is part of my corpus. I compared the live version (4:29) to the studio recording (4:42).</p>
 <p>In the plot we can see that the two recordings do not align perfectly. Instead, there are “blocks” of alignment.</p>
+<iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/4X0hePXqBlFkOZ9WWp5W1e?utm_source=generator" width="100%" height="80" frameBorder="0" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture">
+</iframe>
+<iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/3xhR3mClWXydDCByJxnOwY?utm_source=generator" width="100%" height="80" frameBorder="0" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture">
+</iframe>
 </div>
-<div id="best-of-chroma-1" class="section level3">
-<h3>Best of Chroma</h3>
-<p>Let’s have a look at the chromagrams of the top hits of each year. You can listen to the songs with the player below.</p>
+<div id="best-of-chroma-1" class="section level4">
+<h4>Best of Chroma</h4>
+<p>Let’s also have a look at the chromagrams of the top hits of each year. You can listen to the songs with the player below.</p>
 <p>Typical for hip-hop songs, <em>Never Learn - Brother Ali (2017)</em> and <em>Fernsehturm - Gossenboss mit Zett (2021)</em> show a very regular pattern throughout the whole song, since there is no recurring chorus or similar.</p>
 <p>In <em>Flash - Lewis OfMan (2020)</em> you can very clearly see the alternating G and Gminor, which one can hear in the rhythm of the song as well.</p>
-<p><em>ToDo 2016, 2018, 2019</em></p>
-<p><em>Help Me Loose My Mind - Disclore, London Grammar (2016)</em></p>
-<p><em>My Life - ZHU, Tame Impala (2018)</em></p>
-<p><em>High Hopes - Rhizomatique (2019)</em></p>
+<p>It is harder to make out patterns in the other songs. What is clearly visible in <em>Help Me Loose My Mind - Disclore, London Grammar (2016)</em> are the pauses of the beat before the chorus for about 10 seconds from 0:40 on and 2:00 on.</p>
+<p>I wasn’t able to discover clear patterns for 2018 and 2019 (<em>My Life - ZHU, Tame Impala (2018)</em>, <em>High Hopes - Rhizomatique (2019)</em>)</p>
 <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/6U9T757W62BA5W9T9G5lQh?utm_source=generator" width="100%" height="380" frameBorder="0" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture">
 </iframe>
+</div>
 </div>
 </div>
 </div>
@@ -2920,7 +2926,7 @@ window.FlexDashboardComponents.push({
 <h1>4 - Standard Deviation</h1>
 <div id="column-1-4" class="section level2" data-width="650">
 <h2>Column 1</h2>
-<div id="section-1" class="section level3">
+<div id="section" class="section level3">
 <h3></h3>
 <div class="knitr-options" data-fig-width="576" data-fig-height="460">
 
@@ -2930,7 +2936,7 @@ window.FlexDashboardComponents.push({
 </div>
 <div id="column-2-4" class="section level2" data-width="350">
 <h2>Column 2</h2>
-<div id="section-2" class="section level3">
+<div id="section-1" class="section level3">
 <h3></h3>
 <p>Comparing time campsule, best of 2021, and best of 2016. TODO: go into detail</p>
 </div>
