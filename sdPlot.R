@@ -1,28 +1,36 @@
 library(tidyverse)
 library(spotifyr)
 library(compmus)
+load("data/playlists.RData")
 
-
-getPlaylistAudioAnalysis <- function(id) {
-  get_playlist_audio_features(
-    "anselmpaul",
-    id
-  ) %>%
+getPlaylistAudioAnalysis <- function(playlist) {
+  playlist %>%
     #slice(1:30) %>%
     add_audio_analysis()
 }
 
-audio2016 <- getPlaylistAudioAnalysis("0aiaCO6mk6bEPPDErC9oFp") %>% mutate(genre = "2016")
-audio2021 <- getPlaylistAudioAnalysis("79X273LI34tXLJRXNLIiIz") %>% mutate(genre = "2021")
-audioTC <- getPlaylistAudioAnalysis("5hb3DGs2AGTl4jfXzM6lRF") %>% mutate(genre = "TimeCapsule")
+audio2016 <- getPlaylistAudioAnalysis(topOf2016) %>% mutate(playlist = "2016")
+audio2021 <- getPlaylistAudioAnalysis(topOf2021) %>% mutate(playlist = "2021")
+audioTC <- getPlaylistAudioAnalysis(timeCapsule) %>% mutate(playlist = "TimeCapsule")
 
-mix <- rbind(
-  audioTC, 
-  audio2021, 
-  audio2016)
+audioTC$year <- 0
 
-getSdPlot <- function() {
-  mix %>%
+# mix <- rbind(
+#   audioTC, 
+#   audio2021, 
+#   audio2016)
+
+tc2021 <- rbind(audioTC, audio2021)
+tc2016 <- rbind(audioTC, audio2016)
+years <- rbind(audio2016, audio2021)
+tc2021$plot <- "TimeCapsule + 2021"
+tc2016$plot <- "TimeCapsule + 2016"
+years$plot <- "2016 + 2021"
+
+test <- rbind(tc2021, tc2016, years)
+
+getSdPlot <- function(playlist) {
+  playlist %>%
   mutate(
     sections =
       map(
@@ -37,7 +45,7 @@ getSdPlot <- function() {
     aes(
       x = tempo,
       y = tempo_section_sd,
-      colour = genre,
+      colour = playlist,
       alpha = loudness
     )
   ) +
@@ -48,11 +56,13 @@ getSdPlot <- function() {
   labs(
     x = "Mean Tempo (bpm)",
     y = "SD Tempo",
-    colour = "Genre",
+    colour = "Playlist",
     size = "Duration (min)",
     alpha = "Volume (dBFS)"
   ) +
-  facet_grid(rows = vars(genre))
+  facet_grid(rows = vars(plot))
 }
 
-getSdPlot()
+
+getSdPlot(test)
+

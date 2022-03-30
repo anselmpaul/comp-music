@@ -288,15 +288,30 @@ The plot doesn't show as clear results as the pitches - there's a small checker 
 ###
 ```{r echo=FALSE}
 load("data/04_sdPlot.RData")
-getSdPlot()
+getSdPlot(test)
 ```
 
 ## Column 2 {data-width="350"}
 
 ###
 
-Comparing time campsule, best of 2021, and best of 2016.
-TODO: go into detail
+Let's see how my tempo preferences have changed from 2016 to 2021, and how these
+years compare to the timecapsule.
+
+I've split the plot into three sub plots:
+
+1. 2016 vs. 2021
+
+2. 2016 vs. Timecapsule
+
+3. 2021 vs. Timecapsule
+
+In the first plot we can see that there is indeed difference between the two plots,
+although they still overlap a loud. As somewhat expected, it looks like the 2016
+playlist matches the timecapsule better than the 2021 does. 2021 has a few more
+outlier regarding the y-axis over the whole bandwith of mean tempo. 2016 has an
+interesting cluster of songs at ~150bpm.
+
 
 # 5 - Tempo Tempo Tempoooo!
 
@@ -334,7 +349,7 @@ BPM of 85. That sounds more reasonable.
 #### Favorite beats
 
 On the second tab there's a histogram of the tempo distribution per year. The years
-2016 to 2019 we can see the somewhat expected peak around 120bpm. But in the more recent 
+2016 to 2019 we can see the somewhat expected peak around 120bpm. But in the more recent
 years the distribution has evened out more, and a second peak around 94 bpm has shown up.
 
 # 6 - Clustering
@@ -377,14 +392,14 @@ topTenHeatmap
 
 For the clustering, I selected the top ten song of each year, resulting in 59 (
 one duplicate) songs. I wondered if the clusters would be obvious in a sense of
-genre or similar. For the clustering I used track level features. 
+genre or similar. For the clustering I used track level features.
 
-I wondered if the clustering would naturally recreate the playlist structures, and 
+I wondered if the clustering would naturally recreate the playlist structures, and
 if you look at the tab "Colorized - Playlist Clusters", you can see that it did to some
 extend! It often places songs from the same playlist next to each other and matches
 them on the first or second level.
 
-Additionally you can see that the songs from 2016 are only on the right half of the 
+Additionally you can see that the songs from 2016 are only on the right half of the
 dendrogram, whereas all other playlists are spread all over.
 
 
@@ -396,4 +411,27 @@ attach at them in the end, and it appears that they both cluster the same songs 
 
 # Conclusion
 
-to be done
+## Column 1
+
+### Results
+
+#### Personal Feedback
+
+Coming from a computer science background with a specialisation in data visualisation,
+I really enjoyed this project. It gave me an opportunity to apply skills to a personal
+field of interest, which is the music I'm listening to on a daily basis and have been
+for the past few years. I think it's really cool that spotify exposes so much of the data
+which makes the ingredients for their personalised and themed playlists. I would've never
+guessed on which features (like timbre or chroma) they are based.
+
+#### Findings
+
+My key finds are...
+
+- I'm listening to other genres than I did previously
+- The music I'm listening to tends to be slower now
+- My taste in features like `instrumentalness`, `acousticness` and `speechniness` has also changed
+- Some analysis are more fitted to a smaller scale and did not really translate to the whole corpus
+- I did not uncover the complete recipe for the time capsule playlist
+
+
